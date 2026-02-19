@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import { TooltipProvider } from '@/components/ui/tooltip'
-import SidebarLayout from '@/components/layout/sidebar'
 
 export const metadata: Metadata = {
   title: 'VidyAI — Smart Study Platform',
@@ -13,7 +12,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body>
         <TooltipProvider>
-          <SidebarLayout />
           {children}
         </TooltipProvider>
       </body>
