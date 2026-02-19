@@ -1,5 +1,5 @@
 
-import { StatsGrid, SubjectProgress, WelcomeBanner } from '@/components/dashboard'
+import { StatsGrid, SubjectProgress, TodayTasks, WelcomeBanner } from '@/components/dashboard'
 
 const DashboardPage = () => {
   return (
@@ -9,6 +9,7 @@ const DashboardPage = () => {
 
         <div className="flex flex-col gap-5">
             <SubjectProgress />
+            <TodayTasks />
         </div>
 
     </div>

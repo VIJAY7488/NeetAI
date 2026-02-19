@@ -4,6 +4,8 @@ import { useRouter } from "next/navigation";
 import { Card } from "../ui/card";
 import { SectionTitle } from "../ui/section";
 import { Progress } from "../ui/progress";
+import { useState } from "react";
+import { Badge } from "../ui/badge";
 
 
 
@@ -89,6 +91,44 @@ export function SubjectProgress () {
             ))}
             </div>
 
+        </Card>
+    )
+}
+
+
+// ─── Today Tasks ──────────────────────────────────────────────
+type Task = { id: number; label: string; done: boolean; tag: string; variant: 'green' | 'blue' | 'orange' | 'yellow' }
+
+export function TodayTasks () {
+
+    const [tasks, setTasks] = useState<Task[]>([
+        { id: 1, label: 'Revise Cell Biology Chapter 3', done: true,  tag: 'Biology',  variant: 'green'  },
+        { id: 2, label: 'Complete Physics MCQs Set 4',   done: false, tag: 'Physics',  variant: 'blue'   },
+        { id: 3, label: 'NEET 2022 Paper Analysis',       done: false, tag: 'NEET PYQ', variant: 'orange' },
+        { id: 4, label: 'Organic Chemistry Mechanisms',   done: true,  tag: 'Chemistry',variant: 'yellow' },
+    ])
+
+    const toggle = (id: number) => setTasks((t) => t.map((x) => x.id === id ? { ...x, done: !x.done } : x))
+
+
+    return (
+        <Card className="px-5 py-5">
+            <SectionTitle>Today&apos;s Tasks</SectionTitle>
+            {tasks.map((t) => (
+                <div key={t.id} className="flex items-center gap-3 py-2.5 border-b border-border last:border-none">
+                    <button 
+                    onClick={() => toggle(t.id)}
+                    className={`w-5 h-5 rounded-full border-2 flex items-center justify-center text-[11px] font-bold leading-none shrink-0 transition-colors
+                    ${t.done ? 'bg-[#1a7a4a] border-[#1a7a4a] text-white' : 'border-[#d8d2c6] text-transparent bg-transparent'}`}
+                    >
+                        {t.done && '✓'}
+                    </button>
+
+                    <span className={`text-sm flex-1 ${t.done ? 'line-through text-ink3' : 'text-ink'}`}>{t.label}</span>
+                    <Badge variant={t.variant}>{t.tag}</Badge>
+                </div>
+                
+            ))}
         </Card>
     )
 }
