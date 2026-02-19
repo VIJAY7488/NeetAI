@@ -2,6 +2,8 @@
 
 import { useRouter } from "next/navigation";
 import { Card } from "../ui/card";
+import { SectionTitle } from "../ui/section";
+import { Progress } from "../ui/progress";
 
 
 
@@ -55,5 +57,38 @@ export function StatsGrid () {
                 </Card>
             ))}
         </div>
+    )
+}
+
+
+// ─── Subject Progress ─────────────────────────────────────────
+export function SubjectProgress () {
+
+    const subjects = [
+        { name: 'Biology',   pct: 78, color: '#1a7a4a', tone: 'rgba(26,122,74,0.08)' },
+        { name: 'Physics',   pct: 55, color: 'var(--blue)', tone: 'rgba(26,79,160,0.08)' },
+        { name: 'Chemistry', pct: 64, color: 'var(--yellow)', tone: 'rgba(212,160,23,0.1)' },
+        { name: 'Botany',    pct: 82, color: 'var(--orange)', tone: 'rgba(232,87,10,0.1)' },
+    ]
+
+    return (
+        <Card className="px-5 py-5 gap-4 rounded-2xl">
+            <SectionTitle action={<span className="text-sm text-[#e8570a] cursor-pointer font-medium">Details →</span>}>
+                Subject Progress
+            </SectionTitle>
+
+            <div className="space-y-3">
+                {subjects.map((s) => (
+                <div key={s.name} className="rounded-xl border border-[#ece5d9] px-3.5 py-3" style={{ background: s.tone }}>
+                    <div className="flex justify-between items-center mb-2">
+                        <span className="text-[15px] font-medium text-[#1a1714]">{s.name}</span>
+                        <span className="text-sm font-medium px-2 py-0.5 rounded-full" style={{ color: s.color, background: 'rgba(255,255,255,0.7)' }}>{s.pct}%</span>
+                    </div>
+                    <Progress value={s.pct} color={s.color} />
+                </div>
+            ))}
+            </div>
+
+        </Card>
     )
 }
